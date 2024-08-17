@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+
+    <nav class="bg-gray-800 p-4">
+        <h1 class="text-center text-3xl font-bold">Get Real Weather Info</h1>
+    </nav>
+
+    <div class="container mx-auto mt-10">
+        <div class="flex justify-center">
+            <form method="post" class="w-full max-w-lg">
+                {% csrf_token %}
+                <div class="flex items-center border-b border-gray-600 py-2">
+                    <input type="text" name="city" class="appearance-none bg-transparent border-none w-full text-gray-300 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Enter city name">
+                    <button class="flex-shrink-0 bg-blue-500 hover:bg-blue-700 text-sm text-white py-1 px-2 rounded" type="submit">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if country_code and coordinate and temp and pressure and humidity %}
+        <div class="mt-10">
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-semibold mb-4">Weather Information</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded">
+                        <h5 class="font-bold">Country Code:</h5>
+                        <p>{{ country_code }}</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded">
+                        <h5 class="font-bold">Coordinates:</h5>
+                        <p>{{ coordinate }}</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded">
+                        <h5 class="font-bold">Temperature:</h5>
+                        <p>{{ temp }}</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded">
+                        <h5 class="font-bold">Pressure:</h5>
+                        <p>{{ pressure }} hPa</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded">
+                        <h5 class="font-bold">Humidity:</h5>
+                        <p>{{ humidity }}%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
